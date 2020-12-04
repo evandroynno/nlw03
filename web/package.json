@@ -43,9 +43,5 @@
     "@types/react-dom": "^16.9.8",
     "@types/react-leaflet": "^2.5.2",
     "@types/react-router-dom": "^5.1.6"
-  },
-  "main": "index.js",
-  "repository": "https://github.com/evandroynno/nlw-nlw3-web.git",
-  "author": "Evandro Magalhaes <evandro.ynno@gmail.com>",
-  "license": "MIT"
+  }
 }
