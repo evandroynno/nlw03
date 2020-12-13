@@ -5,39 +5,22 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import { useParams } from 'react-router-dom';
 
 import Sidebar from '../components/Sidebar';
-// import mapIcon from '../utils/mapIcon';
-// import api from '../services/api';
+import mapIcon from '../utils/mapIcon';
+import api from '../services/api';
+import {Orphanages, OrphanageParams} from '../utils/interfaces';
 
 import '../styles/pages/orphanage.css';
 
-interface Orphanage {
-  latitude: number;
-  longitude: number;
-  name: string;
-  about: string;
-  instructions: string;
-  opening_hours: string;
-  open_on_weekends: boolean;
-  images: Array<{
-    id: number;
-    url: string;
-  }>
-}
-
-interface OrphanageParams {
-  id: string;
-}
-
 export default function Orphanage() {
   const params = useParams<OrphanageParams>();
-  const [orphanage, setOrphanage] = useState<Orphanage>();
+  const [orphanage, setOrphanage] = useState<Orphanages>();
   const [activeImageIndex, setActiveImageIndex] = useState(0);
 
-  // useEffect(() => {
-  //   api.get(`orphanages/${params.id}`).then(response => {
-  //     setOrphanage(response.data);
-  //   });
-  // }, [params.id]);
+  useEffect(() => {
+    api.get(`orphanages/${params.id}`).then(response => {
+      setOrphanage(response.data);
+    });
+  }, [params.id]);
 
   if (!orphanage) {
     return <p>Carregando...</p>
@@ -82,10 +65,10 @@ export default function Orphanage() {
                 doubleClickZoom={false}
               >
                 <TileLayer
-                  url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                  url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
                 />
                 <Marker interactive={false} 
-                // icon={mapIcon} 
+                icon={mapIcon} 
                 position={[orphanage.latitude, orphanage.longitude]} />
               </Map>
 

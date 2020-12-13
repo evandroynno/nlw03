@@ -6,7 +6,7 @@ import { useHistory } from 'react-router-dom';
 import { FiPlus } from "react-icons/fi";
 
 import Sidebar from '../components/Sidebar';
-// import mapIcon from '../utils/mapIcon';
+import mapIcon from '../utils/mapIcon';
 // import api from '../services/api';
 
 import '../styles/pages/create-orphanage.css';
@@ -84,19 +84,19 @@ export default function OrphanagesMap() {
             <legend>Dados</legend>
 
             <Map
-              center={[-27.2092052,-49.6401092]}
+              center={[-22.825687, -42.9903308]}
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
             >
               <TileLayer
-                url={`https://api.mapbox.com/styles/v1/mapbox/light-v10/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_TOKEN}`}
+                url={`https://api.mapbox.com/styles/v1/mapbox/streets-v11/tiles/256/{z}/{x}/{y}@2x?access_token=${process.env.REACT_APP_MAPBOX_KEY}`}
               />
 
               { position.latitude !== 0 && (
                 <Marker
                   interactive={false}
-                  // icon={mapIcon}
+                  icon={mapIcon}
                   position={[position.latitude, position.longitude]}
                 />
               )}
